@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body style="background-color: beige">
+    <div>
+        @using (Html.BeginForm("Check", "Home"))
+        {
+            <div>猜數字遊戲：請輸入四個不重複的數字</div>
+            <div>
+                @Html.TextBox("UserNumber")
+                <input type="submit" value="猜" />
+            </div>
+        }
+
+        @*<p>@ViewBag.Answer</p>*@
+
+        @if (ViewBag.A == 4)
+        {
+            <div>恭喜你猜對了！答案是 @string.Join("", ViewBag.Answer)</div>
+            <div>總共猜了 @ViewBag.GuessCount 次</div>
+            <div>猜測歷程：</div>
+            <ul>
+                @foreach (var guess in ViewBag.GuessHistory)
+                {
+                    <li>@guess</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <div>結果：@ViewBag.A A @ViewBag.B B</div>
+            <div>已經猜了 @ViewBag.GuessCount 次</div>
+            <div>猜測歷程：</div>
+            <ul>
+                @if (ViewBag.GuessHistory != null)
+                {
+                    foreach (var guess in ViewBag.GuessHistory)
+                    {
+                        <li>@guess</li>
+                    }
+                }
+            </ul>
+            <div>@ViewBag.Message</div>
+        }
+    </div>
+</body>
+</html>
